@@ -1,0 +1,57 @@
+#
+# step V.a.2
+# Install and Configure Kahu packages on all hypervisors
+#
+
+- hosts: lightcrest
+  tasks:
+    - name: powertrain
+      apt:
+        name: kahu-powertrain
+        state: latest
+    - name: nginx
+      apt:
+        name: nginx
+        state: latest
+    - name: ssl-cert
+      apt:
+        name: ssl-cert
+        state: latest
+    - name: jq
+      apt:
+        name: jq
+        state: latest
+    - name: curl
+      apt:
+        name: curl
+        state: latest
+    - name: wget
+      apt:
+        name: wget
+        state: latest
+    - name: rsync
+      apt:
+        name: rsync
+        state: latest
+    - name: htop
+      apt:
+        name: htop
+        state: latest
+#
+# V.a.2
+# Edit /etc/default/kahu-powertrain to listen on 0.0.0.0 or appropriate IP as required
+# Make a backup.
+#
+    - name: kahu-powertrain KAHU_REST_OPTIONS to listen on 0.0.0.0 
+      lineinfile:
+        dest: /etc/default/kahu-powertrain
+        regexp: '^KAHU_REST_OPTIONS='
+        line: KAHU_REST_OPTIONS="-a 0.0.0.0:8080 -c /kahu/etc/rest.toml"
+        backup: yes
+    - name: kahu-powertrain KAHU_HV_OPTIONS to listen on 0.0.0.0 
+      lineinfile:
+        dest: /etc/default/kahu-powertrain
+        regexp: '^KAHU_HV_OPTIONS='
+        line: KAHU_HV_OPTIONS="-a 0.0.0.0:8999 -c /kahu/etc/hv.toml"
+        backup: yes
+
