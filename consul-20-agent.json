@@ -1,0 +1,9 @@
+{
+  "server": true,
+  "retry_join": [ "10.0.85.11", "10.0.85.12", "10.0.85.13" ],
+  "bootstrap_expect": 2,
+  "advertise_addr": "10.0.85.11",
+  "datacenter": "lax0_vizex",
+  "data_dir": "/var/lib/consul",
+  "enable_syslog": true
+}
