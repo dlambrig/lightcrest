@@ -1,0 +1,9 @@
+authoritative;
+default-lease-time 360000;
+max-lease-time 720000;
+ignore client-updates;
+
+option rfc3442-classless-static-routes code 121 = array of integer 8;
+option ms-classless-static-routes code 249 = array of integer 8;
+
+include "/etc/dhcp/default-vlan.conf";
