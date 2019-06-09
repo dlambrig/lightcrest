@@ -1,0 +1,11 @@
+# Configuration defaults for the Kahu DHCP Lease Server
+
+# NOTE: Remeber, the lease server should be put behind nginx!
+
+# ISC DHCP Server
+# LEASE_SERVE_OPTIONS="127.0.0.1 1979 dhcpd3 /var/run/dhcpd.leases /etc/dhcpd.conf"
+
+# dnsmasq's DHCP Server
+# LEASE_SERVE_OPTIONS="127.0.0.1 1979 dnsmasq /var/lib/misc/dnsmasq.leases"
+
+LEASE_SERVE_OPTIONS="127.0.0.1 1979 dhcpd3 /var/lib/dhcp/dhcpd.leases /etc/dhcp/dhcpd.conf"
