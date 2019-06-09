@@ -1,0 +1,15 @@
+#
+# step V.d
+# configure dhcp
+#
+
+- hosts: lightcrest
+  tasks:
+    - name: configure dhcpd.conf
+      copy:
+        src: ./dhcpd-config 
+        dest:  /etc/dhcp/dhcpd.conf
+
+#
+# What is vlan.84 ?
+#
