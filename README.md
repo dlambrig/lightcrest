@@ -1,1 +1,6 @@
-Put this into the ansible 'roles' subdirectory.
+
+Then at the toplevel invoke the role like this:
+---
+- hosts: lightcrest
+  roles:
+    - lightcrest

@@ -3,8 +3,6 @@
 # Install and configure Consul (backend datastore) on all hypervisors
 #
 
-- hosts: lightcrest
-  tasks:
     - name: consul install
       apt:
         name: consul
@@ -13,3 +11,7 @@
       copy:
         src: ./consul-20-agent.json
         dest:  /etc/consul.d/20-agent.json 
+    - name: nginx configuration
+      copy:
+        src: ./nginx-config
+        dest:  /etc/nginx/sites-enabled/default

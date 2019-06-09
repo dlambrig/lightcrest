@@ -1,2 +1,6 @@
 ---
 # tasks file for lightcrest-role
+- include: install.yml
+- include: install-consul.yml
+- include: configure-dhcp.yml
+

@@ -3,8 +3,6 @@
 # Install and Configure Kahu packages on all hypervisors
 #
 
-- hosts: lightcrest
-  tasks:
     - name: powertrain
       apt:
         name: kahu-powertrain
