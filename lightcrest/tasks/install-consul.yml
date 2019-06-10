@@ -1,17 +1,19 @@
 #
-# step V.b
-# Install and configure Consul (backend datastore) on all hypervisors
+# step V.a
+# Configure remote access
+# a) ssh 
+# b) ipmi
 #
 
-    - name: consul install
-      apt:
-        name: consul
-        state: latest
-    - name: kahu-powertrain KAHU_REST_OPTIONS to listen on 0.0.0.0 
-      copy:
-        src: ./consul-20-agent.json
-        dest:  /etc/consul.d/20-agent.json 
-    - name: nginx configuration
-      copy:
-        src: ./nginx-config
-        dest:  /etc/nginx/sites-enabled/default
+- name: consul install
+  apt:
+    name: consul
+    state: latest
+- name: kahu-powertrain KAHU_REST_OPTIONS to listen on 0.0.0.0 
+  copy:
+    src: ./consul-20-agent.json
+    dest:  /etc/consul.d/20-agent.json 
+- name: nginx configuration
+  copy:
+    src: ./nginx-config
+    dest:  /etc/nginx/sites-enabled/default

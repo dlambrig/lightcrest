@@ -1,0 +1,18 @@
+#
+# step V.a
+# Configure remote access
+# a) ssh 
+# b) ipmi
+#
+    - name: ipmitools
+      apt:
+        name: ipmitool
+        state: latest
+    - name: load ipmi kernel modules
+      modprobe:
+        name: ipmi_devintf
+        state: present
+    # - name: load ipmi kernel modules
+    #  modprobe:
+    #   name: ipmi_si
+    #   state: present
