@@ -1,0 +1,56 @@
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+allow-ovs br0
+iface br0 inet manual
+    ovs_type OVSBridge
+    ovs_ports bond0 v0 br1
+
+allow-br0 bond0
+iface bond0 inet manual
+    ovs_bridge br0
+    ovs_type OVSBond
+    ovs_bonds eth0 eth1
+    ovs_options lacp=active
+    post-up /usr/bin/ovs-vsctl set port ${IFACE} trunks="VLAN,38"
+    post-up /usr/bin/ovs-vsctl set port ${IFACE} vlan_mode=native-untagged
+    post-up /usr/bin/ovs-vsctl set port ${IFACE} bond_mode=balance-tcp
+    post-up /usr/bin/ovs-vsctl set port ${IFACE} other_config:lacp-time=fast
+    post-up /usr/bin/ovs-vsctl set port ${IFACE} other_config:bond-rebalance-interval=100
+    
+allow-br0 v0
+iface v0 inet static
+    ovs_bridge br0
+    ovs_type OVSIntPort
+    address 10.0.VLAN.HOST
+    netmask 255.255.255.0
+    gateway 10.0.VLAN.5
+    dns-domain DOMAIN.lightcrest.com
+    dns-nameservers 204.237.130.5 204.237.130.6
+    ovs_extra set interface ${IFACE} external-ids:iface-id=$(hostname -s)
+    post-up route add -net 10.0.0.0 netmask 255.0.0.0 gw 10.0.VLAN.1
+    post-up route add -net 192.168.0.0 netmask 255.255.0.0 gw 10.0.VLAN.1
+    post-up route add -net 172.16.0.0 netmask 255.240.0.0 gw 10.0.VLAN.1
+    post-up route add -net 8.26.64.0 netmask 255.255.254.0 gw 10.0.VLAN.1
+    post-up route add -net 68.64.190.0 netmask 255.255.255.0 gw 10.0.VLAN.1
+    post-up route add -net 173.205.113.0 netmask 255.255.255.0 gw 10.0.VLAN.1
+    post-up route add -net 204.237.130.0 netmask 255.255.255.0 gw 10.0.VLAN.1
+    post-up route add -net 98.124.154.0 netmask 255.255.254.0 gw 10.0.VLAN.1
+    post-up route add -net 216.1.212.0 netmask 255.255.254.0 gw 10.0.VLAN.1
+    post-up route add -net 104.193.16.0 netmask 255.255.248.0 gw 10.0.VLAN.1
+
+allow-br0 br1
+iface br1 inet manual
+    ovs_type OVSBridge
+    ovs_options br0 38
+    ovs_ports v38
+
+
+allow-br1 v38
+iface v38 inet static
+    ovs_bridge br1
+    ovs_type OVSIntPort
+    ovs_extra set interface ${IFACE} external-ids:iface-id=$(hostname -s)-backup
+    address 10.2.VLAN.HOST
+    netmask 255.255.255.0
