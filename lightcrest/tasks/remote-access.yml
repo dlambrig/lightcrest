@@ -8,11 +8,15 @@
       apt:
         name: ipmitool
         state: latest
+    - name: openipmi
+      apt:
+        name: openipmi
+        state: latest
     - name: load ipmi kernel modules
       modprobe:
         name: ipmi_devintf
         state: present
-    # - name: load ipmi kernel modules
-    #  modprobe:
-    #   name: ipmi_si
-    #   state: present
+    #- name: load ipmi kernel modules
+      #modprobe:
+        #name: openipmi
+        #state: present
