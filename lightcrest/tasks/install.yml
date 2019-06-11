@@ -2,7 +2,17 @@
 # step V.a.2
 # Install and Configure Kahu packages on all hypervisors
 #
-
+    - name: kahu-powertrain installation
+      copy:
+        src: ./kahu-powertrain.list
+        dest:  /etc/apt/sources.list.d/kahu-powertrain.list
+    - name: apt-transport-https
+      apt:
+        name: apt-transport-https
+        state: latest
+    - name: Update and upgrade apt packages
+      apt:
+        update_cache: yes
     - name: powertrain
       apt:
         name: kahu-powertrain
