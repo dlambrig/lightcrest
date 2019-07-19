@@ -3,10 +3,18 @@
 # configure dhcp
 #
 
+    - name: dhcp-server
+      apt:
+        name: isc-dhcp-server
+        state: latest
     - name: configure dhcpd.conf
       copy:
         src: ./dhcpd-config 
         dest:  /etc/dhcp/dhcpd.conf
+    - name: setup kahu-lease-serve
+      copy:
+        src: ./kahu-lease-serve-config
+        dest:  /etc/default/kahu-lease-serve
 
 #
 # What is vlan.84 ?
