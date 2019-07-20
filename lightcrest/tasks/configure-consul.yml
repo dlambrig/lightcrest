@@ -1,0 +1,4 @@
+- name: post to consul
+  shell:  curl -i http://localhost:8500/v1/kv/kahu/v0.2/compute/profile/empty/public.json -X PUT -d @{{ var_playbook_dir }}/files/empty.json
+  shell:  curl -i http://localhost:8500/v1/kv/kahu/v0.2/compute/size/1cpu1gb/public.json -X PUT -d @{{ var_playbook_dir }}/files/1cpu1gb.json
+

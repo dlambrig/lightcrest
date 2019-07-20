@@ -1,0 +1,9 @@
+{
+    "storage": {},
+    "network": {
+        "br0": {
+            "order": 0,
+            "type": "virtio"
+        }
+    }
+}

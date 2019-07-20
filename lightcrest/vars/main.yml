@@ -1,6 +1,8 @@
 ---
 # vars file for lightcrest-role
 
+var_playbook_dir: "/root/roles/lightcrest"
+
 # vars for consul configuration
 var_consul_retry_join: '"10.0.40.215", "10.0.40.161" '
 var_consul_advertise_addr: '"10.0.40.215"'

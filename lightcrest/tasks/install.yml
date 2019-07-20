@@ -7,12 +7,14 @@
         src: ./kahu-powertrain.list
         dest:  /etc/apt/sources.list.d/kahu-powertrain.list
     - name: apt-get update
-      shell: apt-get update
+      shell: apt-get update --allow-insecure-repositories
     - name: apt update_cache
       apt:
+        force: yes
         update_cache: yes
     - name: apt-transport-https
       apt:
+        force: yes
         name: apt-transport-https
         state: latest
     - name: powertrain
@@ -21,30 +23,37 @@
         state: latest
     - name: nginx
       apt:
+        force: yes
         name: nginx
         state: latest
     - name: ssl-cert
       apt:
+        force: yes
         name: ssl-cert
         state: latest
     - name: jq
       apt:
+        force: yes
         name: jq
         state: latest
     - name: curl
       apt:
+        force: yes
         name: curl
         state: latest
     - name: wget
       apt:
+        force: yes
         name: wget
         state: latest
     - name: rsync
       apt:
+        force: yes
         name: rsync
         state: latest
     - name: htop
       apt:
+        force: yes
         name: htop
         state: latest
 #
