@@ -1,0 +1,3 @@
+{
+  "dhcp-lease-server-url":"http://127.0.0.1:1979/dhcp/br0"
+}

@@ -1,4 +1,5 @@
-- name: post to consul
+- name: setup dhcp-lease-server-url
+  shell:  curl -i http://localhost:8500/v1/kv/kahu/v0.2/network/br0/public.json -X PUT -d @{{ var_playbook_dir }}/files/dhcp-lease-server-url.json
   shell:  curl -i http://localhost:8500/v1/kv/kahu/v0.2/compute/profile/empty/public.json -X PUT -d @{{ var_playbook_dir }}/files/empty.json
   shell:  curl -i http://localhost:8500/v1/kv/kahu/v0.2/compute/size/1cpu1gb/public.json -X PUT -d @{{ var_playbook_dir }}/files/1cpu1gb.json
 - name: private json key
