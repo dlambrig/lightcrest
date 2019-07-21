@@ -1,0 +1,8 @@
+{
+    "name": "kvm1",
+    "type": "Production Hypervisor",
+    "arch": "amd64",
+    "serialNumber": "0000",
+    "physicalStorage": [],
+    "physicalNetwork": []
+}
