@@ -22,7 +22,7 @@
   lineinfile:
     dest: /etc/consul.d/20-agent.json
     regexp: '\"advertise_addr'
-    line: '"advertise_addr":  {{ var_consul_advertise_addr }} ,'
+    line: '"advertise_addr":  {{ ansible_default_ipv4.address }} ,'
 - name: replace advertise_addr ip addresses
   lineinfile:
     dest: /etc/consul.d/20-agent.json
