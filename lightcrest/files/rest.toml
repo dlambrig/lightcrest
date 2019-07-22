@@ -1,0 +1,4 @@
+serve_client = "/kahu/www"
+ 
+ [auth]
+ enable = true

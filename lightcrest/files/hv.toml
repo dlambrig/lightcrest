@@ -1,0 +1,7 @@
+prefix = "/kahu"
+ qemu_conf_template = "/kahu/etc/qemu.conf.tmpl"
+ qemu_cmd_template = "/kahu/etc/qemu.cmd.tmpl"
+ uri = "/hypervisor/instance/0"
+ 
+ [storage]
+ max_usage_percent = 95
