@@ -1,27 +1,52 @@
 - name: setup dhcp-lease-server-url
   shell:  curl -i http://localhost:8500/v1/kv/kahu/v0.2/network/br0/public.json -X PUT -d @{{ var_playbook_dir }}/files/dhcp-lease-server-url.json
+
 - name: wait
-  pause:
-    seconds: 5
+  shell: "consul kv get kahu/v0.2/network/br0/public.json"
+  register: result
+  until: result.stdout.find("Error") == -1
+  retries: 8
+  delay: 1
+
 - name: next
   shell:  curl -i http://localhost:8500/v1/kv/kahu/v0.2/compute/profile/empty/public.json -X PUT -d @{{ var_playbook_dir }}/files/empty.json
+
 - name: wait2
-  pause:
-    seconds: 5
+  shell: "consul kv get kahu/v0.2/compute/profile/empty/public.json"
+  register: result
+  until: result.stdout.find("Error") == -1
+  retries: 8
+  delay: 1
+
 - name: 1cpu1gb
   shell:  curl -i http://localhost:8500/v1/kv/kahu/v0.2/compute/size/1cpu1gb/public.json -X PUT -d @{{ var_playbook_dir }}/files/1cpu1gb.json
-- name: wait
-  pause:
-    seconds: 5
+
+- name: wait3
+  shell: "consul kv get kahu/v0.2/compute/size/1cpu1gb/public.json"
+  register: result
+  until: result.stdout.find("Error") == -1
+  retries: 8
+  delay: 1
 
 - name: private json key
   shell:  curl -i http://localhost:8500/v1/kv/kahu/v0.2/hypervisor/instance/0/private.json -X PUT -d '{"url":"{{ var_private_json_key }}"}'
-- name: wait
-  pause:
-    seconds: 5
+
+- name: wait4
+  shell: "consul kv get kahu/v0.2/hypervisor/instance/0/private.json"
+  register: result
+  until: result.stdout.find("Error") == -1
+  retries: 8
+  delay: 1
 
 - name: public json key
   shell:  curl -i http://localhost:8500/v1/kv/kahu/v0.2/hypervisor/instance/0/public.json -X PUT -d @{{ var_playbook_dir }}/files/public.json
+
+- name: wait5
+  shell: "consul kv get kahu/v0.2/hypervisor/instance/0/public.json"
+  register: result
+  until: result.stdout.find("Error") == -1
+  retries: 8
+  delay: 1
 
 - name: hv.toml
   copy:
