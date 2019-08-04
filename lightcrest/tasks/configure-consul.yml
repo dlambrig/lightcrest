@@ -1,5 +1,5 @@
 - name: setup dhcp-lease-server-url
-  shell:  curl -i http://localhost:8500/v1/kv/kahu/v0.2/network/br0/public.json -X PUT -d @{{ var_playbook_dir }}/files/dhcp-lease-server-url.json
+  shell:  curl -i http://localhost:8500/v1/kv/kahu/v0.2/network/br0/public.json -X PUT -d @{{ playbook_dir }}/files/dhcp-lease-server-url.json
 
 - name: wait
   shell: "consul kv get kahu/v0.2/network/br0/public.json"
@@ -9,7 +9,7 @@
   delay: 1
 
 - name: next
-  shell:  curl -i http://localhost:8500/v1/kv/kahu/v0.2/compute/profile/empty/public.json -X PUT -d @{{ var_playbook_dir }}/files/empty.json
+  shell:  curl -i http://localhost:8500/v1/kv/kahu/v0.2/compute/profile/empty/public.json -X PUT -d @{{ playbook_dir }}/files/empty.json
 
 - name: wait2
   shell: "consul kv get kahu/v0.2/compute/profile/empty/public.json"
@@ -19,7 +19,7 @@
   delay: 1
 
 - name: 1cpu1gb
-  shell:  curl -i http://localhost:8500/v1/kv/kahu/v0.2/compute/size/1cpu1gb/public.json -X PUT -d @{{ var_playbook_dir }}/files/1cpu1gb.json
+  shell:  curl -i http://localhost:8500/v1/kv/kahu/v0.2/compute/size/1cpu1gb/public.json -X PUT -d @{{ playbook_dir }}/files/1cpu1gb.json
 
 - name: wait3
   shell: "consul kv get kahu/v0.2/compute/size/1cpu1gb/public.json"
@@ -39,7 +39,7 @@
   delay: 1
 
 - name: public json key
-  shell:  curl -i http://localhost:8500/v1/kv/kahu/v0.2/hypervisor/instance/0/public.json -X PUT -d @{{ var_playbook_dir }}/files/public.json
+  shell:  curl -i http://localhost:8500/v1/kv/kahu/v0.2/hypervisor/instance/0/public.json -X PUT -d @{{ playbook_dir }}/files/public.json
 
 - name: wait5
   shell: "consul kv get kahu/v0.2/hypervisor/instance/0/public.json"
