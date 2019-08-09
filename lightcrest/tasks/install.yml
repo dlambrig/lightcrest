@@ -8,6 +8,11 @@
         dest:  /etc/apt/sources.list.d/kahu-powertrain.list
     - name: apt-get update
       shell: apt-get update --allow-insecure-repositories
+      register: apt_status
+      ignore_errors: true
+    - name: deal with older versions of apt-get
+      shell: apt-get update
+      when: apt_status.rc != 0
     - name: apt update_cache
       apt:
         force: yes
