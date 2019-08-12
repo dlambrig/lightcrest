@@ -5,6 +5,6 @@
   "advertise_addr": "10.0.40.215",
   "datacenter": "lax0_vizex",
   "data_dir": "/var/lib/consul",
-  "node": "thisnode",
+  "node_name": "thisnode",
   "enable_syslog": true
 }

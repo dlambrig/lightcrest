@@ -6,4 +6,4 @@ var_consul_retry_join: '"10.0.40.215", "10.0.40.161" '
 var_consul_advertise_addr: ansible_default_ipv4.address
 var_private_json_key: "http://10.0.40.215:8999"
 var_consul_datacenter: 'lax0_vizex'
-var_consul_node: 'lax0_lizex_node'
+var_consul_node: 'node'

@@ -9,6 +9,16 @@
   apt:
     name: consul
     state: latest
+- name: Create consul directory 
+  file:
+    path: /var/lib/consul
+    state: directory
+    owner: consul
+    group: consul
+- name: start consul
+  service:
+    name: consul
+    state: started
 - name: kahu-powertrain KAHU_REST_OPTIONS to listen on 0.0.0.0 
   copy:
     src: ./consul-20-agent.json
@@ -26,8 +36,8 @@
 - name: replace advertise_addr ip addresses
   lineinfile:
     dest: /etc/consul.d/20-agent.json
-    regexp: '\"node'
-    line: '"node":  "{{ var_consul_node + "_" + ansible_default_ipv4.address }}" ,'
+    regexp: '\"node_name'
+    line: '"node_name":  "{{ var_consul_node + "-" + ansible_default_ipv4.address }}" ,'
 - name: replace advertise_addr ip addresses
   lineinfile:
     dest: /etc/consul.d/20-agent.json
