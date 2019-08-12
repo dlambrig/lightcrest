@@ -26,8 +26,13 @@
 - name: replace advertise_addr ip addresses
   lineinfile:
     dest: /etc/consul.d/20-agent.json
+    regexp: '\"node'
+    line: '"node":  "{{ var_consul_node + "_" + ansible_default_ipv4.address }}" ,'
+- name: replace advertise_addr ip addresses
+  lineinfile:
+    dest: /etc/consul.d/20-agent.json
     regexp: '\"datacenter'
-    line: '"datacenter":  {{ var_consul_datacenter }} ,'
+    line: '"datacenter":  "{{ var_consul_datacenter }}" ,'
 - name: nginx configuration
   copy:
     src: ./nginx-config

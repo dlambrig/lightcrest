@@ -17,10 +17,6 @@
       args:
         warn: false
       when: apt_status.rc != 0
-    - name: apt update_cache
-      apt:
-        force: yes
-        update_cache: yes
     - name: apt-transport-https
       apt:
         force: yes
