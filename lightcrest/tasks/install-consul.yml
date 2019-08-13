@@ -33,7 +33,19 @@
     dest: /etc/consul.d/20-agent.json
     regexp: '\"advertise_addr'
     line: '"advertise_addr":  "{{ ansible_default_ipv4.address }}" ,'
-- name: replace advertise_addr ip addresses
+- name: replace bootstrap expect count if only 1 node
+  lineinfile:
+    dest: /etc/consul.d/20-agent.json
+    regexp: '\"bootstrap_expect'
+    line: '"bootstrap":  true ,'
+  when: var_bootstrap_expect == 1
+- name: replace bootstrap expect count if more than 1 node
+  lineinfile:
+    dest: /etc/consul.d/20-agent.json
+    regexp: '\"bootstrap_expect'
+    line: '"bootstrap_expect":  {{ var_bootstrap_expect }} ,'
+  when: var_bootstrap_expect != 1
+- name: replace node name
   lineinfile:
     dest: /etc/consul.d/20-agent.json
     regexp: '\"node_name'
